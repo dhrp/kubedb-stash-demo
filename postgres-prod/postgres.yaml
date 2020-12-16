@@ -1,0 +1,14 @@
+apiVersion: kubedb.com/v1alpha2
+kind: Postgres
+metadata:
+  name: postgres
+spec:
+  version: "10.6-v3"
+  storageType: Durable
+  storage:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1Gi
+  terminationPolicy: DoNotTerminate

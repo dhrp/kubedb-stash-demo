@@ -1,0 +1,763 @@
+   0.0 TEL | Telepresence 0.108 launched at Thu Dec  3 00:16:32 2020
+   0.0 TEL |   /usr/local/bin/telepresence --expose 8080:80
+   0.0 TEL | uname: uname_result(system='Darwin', node='Oswald.local', release='19.6.0', version='Darwin Kernel Version 19.6.0: Thu Jun 18 20:49:00 PDT 2020; root:xnu-6153.141.1~1/RELEASE_X86_64', machine='x86_64', processor='i386')
+   0.0 TEL | Platform: darwin
+   0.0 TEL | WSL: False
+   0.0 TEL | Python 3.7.6 (default, Feb 19 2020, 22:46:41)
+   0.0 TEL | [Clang 11.0.0 (clang-1100.0.33.17)]
+   0.1 TEL | BEGIN SPAN main.py:40(main)
+   0.1 TEL | BEGIN SPAN startup.py:83(set_kube_command)
+   0.1 TEL | Found kubectl -> /usr/local/bin/kubectl
+   0.1 TEL | Found oc -> /usr/local/sbin/oc
+   0.1 TEL | [1] Capturing: kubectl config current-context
+   0.2 TEL | [1] captured in 0.09 secs.
+   0.2 TEL | [2] Capturing: kubectl --context blue-blue-master1 version --short
+   0.5 TEL | [2] captured in 0.34 secs.
+   0.5 TEL | [3] Capturing: kubectl --context blue-blue-master1 config view -o json
+   0.6 TEL | [3] captured in 0.09 secs.
+   0.6 TEL | [4] Capturing: kubectl --context blue-blue-master1 api-versions
+   0.8 TEL | [4] captured in 0.23 secs.
+   0.8 TEL | Command: kubectl 1.16.3
+   0.8 TEL | Context: blue-blue-master1, namespace: default, version: 1.19.3
+   0.8 >>> | Warning: kubectl 1.16.3 may not work correctly with cluster version 1.19.3 due to the version discrepancy. See https://kubernetes.io/docs/setup/version-skew-policy/ for more information.
+   0.8 >>> | 
+   0.8 TEL | END SPAN startup.py:83(set_kube_command)    0.7s
+   0.8 >>> | Using a Pod instead of a Deployment for the Telepresence proxy. If you experience problems, please file an issue!
+   0.8 >>> | Set the environment variable TELEPRESENCE_USE_DEPLOYMENT to any non-empty value to force the old behavior, e.g.,
+   0.8 >>> |     env TELEPRESENCE_USE_DEPLOYMENT=1 telepresence --run curl hello
+   0.8 >>> | 
+   0.8 TEL | Found ssh -> /usr/bin/ssh
+   0.8 TEL | [5] Capturing: ssh -V
+   0.8 TEL | [5] captured in 0.01 secs.
+   0.8 TEL | Found bash -> /usr/local/bin/bash
+   0.8 TEL | Found sshuttle-telepresence -> /usr/local/Cellar/telepresence/0.108/libexec/sshuttle-telepresence
+   0.8 TEL | Found pfctl -> /sbin/pfctl
+   0.8 TEL | Found sudo -> /usr/bin/sudo
+   0.8 TEL | [6] Running: sudo -n echo -n
+   0.9 TEL | [6] ran in 0.11 secs.
+   0.9 >>> | Starting proxy with method 'vpn-tcp', which has the following limitations: All processes are affected, only one telepresence can run per machine, and you can't use other VPNs. You may need to add cloud hosts and headless services with --also-proxy. For a full list of method limitations see https://telepresence.io/reference/methods.html
+   0.9 TEL | Found sshfs -> /usr/local/bin/sshfs
+   0.9 TEL | Found umount -> /sbin/umount
+   0.9 >>> | Volumes are rooted at $TELEPRESENCE_ROOT. See https://telepresence.io/howto/volumes.html for details.
+   0.9 TEL | [7] Running: kubectl --context blue-blue-master1 --namespace default get pods telepresence-connectivity-check --ignore-not-found
+   1.2 TEL | [7] ran in 0.23 secs.
+   1.8 TEL | Scout info: {'latest_version': '0.108', 'application': 'telepresence', 'notices': []}
+   1.8 >>> | Starting network proxy to cluster using new Pod telepresence-1606950992-3726609-11632
+   1.8 TEL | [8] Running: kubectl --context blue-blue-master1 --namespace default create -f -
+   2.3   8 | pod/telepresence-1606950992-3726609-11632 created
+   2.4   8 | service/telepresence-1606950992-3726609-11632 created
+   2.4 TEL | [8] ran in 0.58 secs.
+   2.4 TEL | BEGIN SPAN remote.py:109(wait_for_pod)
+   2.4 TEL | [9] Running: kubectl --context blue-blue-master1 --namespace default wait --for=condition=ready --timeout=60s pod/telepresence-1606950992-3726609-11632
+  10.9   9 | pod/telepresence-1606950992-3726609-11632 condition met
+  10.9 TEL | [9] ran in 8.55 secs.
+  10.9 TEL | [10] Capturing: kubectl --context blue-blue-master1 --namespace default get pod telepresence-1606950992-3726609-11632 -o json
+  11.3 TEL | [10] captured in 0.41 secs.
+  11.3 TEL | END SPAN remote.py:109(wait_for_pod)    9.0s
+  11.3 TEL | BEGIN SPAN connect.py:37(connect)
+  11.3 TEL | [11] Launching kubectl logs: kubectl --context blue-blue-master1 --namespace default logs -f telepresence-1606950992-3726609-11632 --container telepresence --tail=10
+  11.3 TEL | [12] Launching kubectl port-forward: kubectl --context blue-blue-master1 --namespace default port-forward telepresence-1606950992-3726609-11632 53171:8022
+  11.3 TEL | [13] Running: ssh -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oConnectTimeout=5 -q -p 53171 telepresence@127.0.0.1 /bin/true
+  11.4 TEL | [13] exit 255 in 0.03 secs.
+  11.6  11 | 2020-12-02T23:16:45+0000 [-] Loading ./forwarder.py...
+  11.6  11 | 2020-12-02T23:16:45+0000 [-] /etc/resolv.conf changed, reparsing
+  11.6  11 | 2020-12-02T23:16:45+0000 [-] Resolver added ('10.43.0.10', 53) to server list
+  11.6  11 | 2020-12-02T23:16:45+0000 [-] SOCKSv5Factory starting on 9050
+  11.6  11 | 2020-12-02T23:16:45+0000 [socks.SOCKSv5Factory#info] Starting factory <socks.SOCKSv5Factory object at 0x7ff5689f19b0>
+  11.6  11 | 2020-12-02T23:16:45+0000 [-] DNSDatagramProtocol starting on 9053
+  11.6  11 | 2020-12-02T23:16:45+0000 [-] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7ff5689f1c88>
+  11.6  11 | 2020-12-02T23:16:45+0000 [-] Loaded.
+  11.6  11 | 2020-12-02T23:16:45+0000 [twisted.scripts._twistd_unix.UnixAppLogger#info] twistd 20.3.0 (/usr/bin/python3.6 3.6.8) starting up.
+  11.6  11 | 2020-12-02T23:16:45+0000 [twisted.scripts._twistd_unix.UnixAppLogger#info] reactor class: twisted.internet.epollreactor.EPollReactor.
+  11.6 TEL | [14] Running: ssh -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oConnectTimeout=5 -q -p 53171 telepresence@127.0.0.1 /bin/true
+  11.6 TEL | [14] exit 255 in 0.02 secs.
+  11.7  12 | Forwarding from 127.0.0.1:53171 -> 8022
+  11.7  12 | Forwarding from [::1]:53171 -> 8022
+  11.9 TEL | [15] Running: ssh -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oConnectTimeout=5 -q -p 53171 telepresence@127.0.0.1 /bin/true
+  11.9  12 | Handling connection for 53171
+  12.2 TEL | [15] ran in 0.29 secs.
+  12.2 >>> | Forwarding remote port 80 to local port 8080.
+  12.2 TEL | [16] Launching SSH port forward (exposed ports): ssh -N -oServerAliveInterval=1 -oServerAliveCountMax=10 -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oConnectTimeout=5 -q -p 53171 telepresence@127.0.0.1 -R '*:80:127.0.0.1:8080'
+  12.2 >>> | 
+  12.2 TEL | Launching Web server for proxy poll
+  12.2 TEL | [17] Launching SSH port forward (socks and proxy poll): ssh -N -oServerAliveInterval=1 -oServerAliveCountMax=10 -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oConnectTimeout=5 -q -p 53171 telepresence@127.0.0.1 -L127.0.0.1:53187:127.0.0.1:9050 -R9055:127.0.0.1:53188
+  12.2  12 | Handling connection for 53171
+  12.2 TEL | END SPAN connect.py:37(connect)    0.9s
+  12.2 TEL | BEGIN SPAN remote_env.py:29(get_remote_env)
+  12.2 TEL | [18] Capturing: kubectl --context blue-blue-master1 --namespace default exec telepresence-1606950992-3726609-11632 --container telepresence -- python3 podinfo.py
+  12.2  12 | Handling connection for 53171
+  12.8 TEL | [18] captured in 0.62 secs.
+  12.8 TEL | END SPAN remote_env.py:29(get_remote_env)    0.6s
+  12.8 TEL | BEGIN SPAN mount.py:30(mount_remote_volumes)
+  12.8 TEL | [19] Running: sshfs -p 53171 -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oConnectTimeout=5 telepresence@127.0.0.1:/ /tmp/tel-r3jf7aqg/fs
+  13.1  19 | mount_osxfuse: the file system is not available (2)
+  13.1 TEL | [19] exit 1 in 0.29 secs.
+  13.1 >>> | Mounting remote volumes failed, they will be unavailable in this session. If you are running on Windows Subystem for Linux then see https://github.com/datawire/telepresence/issues/115, otherwise please report a bug, attaching telepresence.log to the bug report: https://github.com/datawire/telepresence/issues/new
+  13.1 >>> | 
+  13.1 >>> | Mount error was: mount_osxfuse: the file system is not available (2)
+  13.1 TEL | END SPAN mount.py:30(mount_remote_volumes)    0.3s
+  13.1 TEL | BEGIN SPAN vpn.py:62(connect_sshuttle)
+  13.1 TEL | BEGIN SPAN cidr.py:113(get_proxy_cidrs)
+  13.1 TEL | END SPAN cidr.py:113(get_proxy_cidrs)    0.0s
+  13.1 TEL | [20] Launching sshuttle: sshuttle-telepresence -v --dns --method auto -e 'ssh -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oConnectTimeout=5' -r telepresence@127.0.0.1:53171 --to-ns 127.0.0.1:9053 10.43.0.0/16 10.42.1.0/24 10.42.2.0/24 10.42.0.0/24
+  13.1 TEL | BEGIN SPAN vpn.py:85(connect_sshuttle,sshuttle-wait)
+  13.1 TEL | Wait for vpn-tcp connection: hellotelepresence-0
+  13.1 TEL | [21] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-0")'
+  13.3 TEL | [21] exit 1 in 0.13 secs.
+  13.3 TEL | [22] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-0.a.sanity.check.telepresence.io")'
+  13.4 TEL | [22] exit 1 in 0.13 secs.
+  13.5 TEL | Wait for vpn-tcp connection: hellotelepresence-1
+  13.5 TEL | [23] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-1")'
+  13.7 TEL | [23] exit 1 in 0.23 secs.
+  13.7 TEL | [24] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-1.a.sanity.check.telepresence.io")'
+  13.9 TEL | [24] exit 1 in 0.13 secs.
+  14.0 TEL | Wait for vpn-tcp connection: hellotelepresence-2
+  14.0 TEL | [25] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-2")'
+  14.1 TEL | [25] exit 1 in 0.13 secs.
+  14.1 TEL | [26] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-2.a.sanity.check.telepresence.io")'
+  14.2 TEL | [26] exit 1 in 0.08 secs.
+  14.3 TEL | Wait for vpn-tcp connection: hellotelepresence-3
+  14.3 TEL | [27] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-3")'
+  14.4 TEL | [27] exit 1 in 0.07 secs.
+  14.4 TEL | [28] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-3.a.sanity.check.telepresence.io")'
+  14.4 TEL | [28] exit 1 in 0.07 secs.
+  14.5 TEL | Wait for vpn-tcp connection: hellotelepresence-4
+  14.5 TEL | [29] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-4")'
+  14.6 TEL | [29] exit 1 in 0.10 secs.
+  14.6 TEL | [30] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-4.a.sanity.check.telepresence.io")'
+  14.8 TEL | [30] exit 1 in 0.13 secs.
+  14.9 TEL | Wait for vpn-tcp connection: hellotelepresence-5
+  14.9 TEL | [31] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-5")'
+  14.9  20 | Starting sshuttle proxy.
+  15.0 TEL | [31] exit 1 in 0.13 secs.
+  15.0 TEL | [32] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-5.a.sanity.check.telepresence.io")'
+  15.1 TEL | [32] exit 1 in 0.13 secs.
+  15.2 TEL | Wait for vpn-tcp connection: hellotelepresence-6
+  15.2 TEL | [33] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-6")'
+  15.4 TEL | [33] exit 1 in 0.13 secs.
+  15.4 TEL | [34] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-6.a.sanity.check.telepresence.io")'
+  15.5 TEL | [34] exit 1 in 0.13 secs.
+  15.6 TEL | Wait for vpn-tcp connection: hellotelepresence-7
+  15.6 TEL | [35] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-7")'
+  15.8 TEL | [35] exit 1 in 0.18 secs.
+  15.8 TEL | [36] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-7.a.sanity.check.telepresence.io")'
+  15.9 TEL | [36] exit 1 in 0.08 secs.
+  16.0 TEL | Wait for vpn-tcp connection: hellotelepresence-8
+  16.0 TEL | [37] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-8")'
+  16.1 TEL | [37] exit 1 in 0.13 secs.
+  16.1 TEL | [38] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-8.a.sanity.check.telepresence.io")'
+  16.2 TEL | [38] exit 1 in 0.08 secs.
+  16.3 TEL | Wait for vpn-tcp connection: hellotelepresence-9
+  16.3 TEL | [39] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-9")'
+  16.3 TEL | [39] exit 1 in 0.08 secs.
+  16.3 TEL | [40] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-9.a.sanity.check.telepresence.io")'
+  16.4 TEL | [40] exit 1 in 0.07 secs.
+  16.5 TEL | Wait for vpn-tcp connection: hellotelepresence-10
+  16.5 TEL | [41] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-10")'
+  16.7 TEL | [41] exit 1 in 0.20 secs.
+  16.7 TEL | [42] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-10.a.sanity.check.telepresence.io")'
+  16.9 TEL | [42] exit 1 in 0.13 secs.
+  17.0 TEL | Wait for vpn-tcp connection: hellotelepresence-11
+  17.0 TEL | [43] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-11")'
+  17.1 TEL | [43] exit 1 in 0.12 secs.
+  17.1 TEL | [44] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-11.a.sanity.check.telepresence.io")'
+  17.2 TEL | [44] exit 1 in 0.08 secs.
+  17.3 TEL | Wait for vpn-tcp connection: hellotelepresence-12
+  17.3 TEL | [45] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-12")'
+  17.4 TEL | [45] exit 1 in 0.13 secs.
+  17.4 TEL | [46] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-12.a.sanity.check.telepresence.io")'
+  17.5 TEL | [46] exit 1 in 0.08 secs.
+  17.6 TEL | Wait for vpn-tcp connection: hellotelepresence-13
+  17.6 TEL | [47] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-13")'
+  17.7  20 | firewall manager: Starting firewall with Python version 3.7.6
+  17.7  20 | firewall manager: ready method name pf.
+  17.7 TEL | [47] exit 1 in 0.13 secs.
+  17.7 TEL | [48] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-13.a.sanity.check.telepresence.io")'
+  17.7  20 | IPv6 enabled: True
+  17.7  20 | UDP enabled: False
+  17.7  20 | DNS enabled: True
+  17.7  20 | TCP redirector listening on ('::1', 12300, 0, 0).
+  17.7  20 | TCP redirector listening on ('127.0.0.1', 12300).
+  17.7  20 | DNS listening on ('::1', 12300, 0, 0).
+  17.7  20 | DNS listening on ('127.0.0.1', 12300).
+  17.7  20 | Starting client with Python version 3.7.6
+  17.7  20 | c : connecting to server...
+  17.7  12 | Handling connection for 53171
+  17.8 TEL | [48] exit 1 in 0.08 secs.
+  17.9  20 | Warning: Permanently added '[127.0.0.1]:53171' (ECDSA) to the list of known hosts.
+  17.9 TEL | Wait for vpn-tcp connection: hellotelepresence-14
+  17.9 TEL | [49] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-14")'
+  18.0 TEL | [49] exit 1 in 0.08 secs.
+  18.0 TEL | [50] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-14.a.sanity.check.telepresence.io")'
+  18.0 TEL | [50] exit 1 in 0.08 secs.
+  18.2 TEL | Wait for vpn-tcp connection: hellotelepresence-15
+  18.2 TEL | [51] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-15")'
+  18.2  20 | Starting server with Python version 3.6.8
+  18.2  20 |  s: latency control setting = True
+  18.2  20 |  s: available routes:
+  18.2  20 | c : Connected.
+  18.2  20 | firewall manager: setting up.
+  18.2  20 | >> pfctl -s Interfaces -i lo -v
+  18.2  20 | >> pfctl -s all
+  18.2  20 | >> pfctl -a sshuttle6-12300 -f /dev/stdin
+  18.2  20 | >> pfctl -E
+  18.2  20 | >> pfctl -s Interfaces -i lo -v
+  18.2  20 | >> pfctl -s all
+  18.2 TEL | [51] exit 1 in 0.08 secs.
+  18.2 TEL | [52] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-15.a.sanity.check.telepresence.io")'
+  18.3  20 | >> pfctl -a sshuttle-12300 -f /dev/stdin
+  18.3  20 | >> pfctl -E
+  18.3 TEL | [52] exit 1 in 0.07 secs.
+  18.4 TEL | Wait for vpn-tcp connection: hellotelepresence-16
+  18.4 TEL | [53] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-16")'
+  18.5 TEL | [53] exit 1 in 0.08 secs.
+  18.5 TEL | [54] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-16.a.sanity.check.telepresence.io")'
+  18.6 TEL | [54] exit 1 in 0.08 secs.
+  18.7 TEL | Wait for vpn-tcp connection: hellotelepresence-17
+  18.7 TEL | [55] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-17")'
+  18.7 TEL | [55] exit 1 in 0.07 secs.
+  18.7 TEL | [56] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-17.a.sanity.check.telepresence.io")'
+  18.8 TEL | [56] exit 1 in 0.08 secs.
+  18.9 TEL | Wait for vpn-tcp connection: hellotelepresence-18
+  18.9 TEL | [57] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-18")'
+  19.1 TEL | [57] exit 1 in 0.14 secs.
+  19.1 TEL | [58] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-18.a.sanity.check.telepresence.io")'
+  19.2 TEL | [58] exit 1 in 0.13 secs.
+  19.3 TEL | Wait for vpn-tcp connection: hellotelepresence-19
+  19.3 TEL | [59] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-19")'
+  19.4 TEL | [59] exit 1 in 0.13 secs.
+  19.4 TEL | [60] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-19.a.sanity.check.telepresence.io")'
+  19.5 TEL | [60] exit 1 in 0.08 secs.
+  19.6 TEL | Wait for vpn-tcp connection: hellotelepresence-20
+  19.6 TEL | [61] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-20")'
+  19.7 TEL | [61] exit 1 in 0.08 secs.
+  19.7 TEL | [62] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-20.a.sanity.check.telepresence.io")'
+  19.8 TEL | [62] exit 1 in 0.12 secs.
+  19.9 TEL | Wait for vpn-tcp connection: hellotelepresence-21
+  19.9 TEL | [63] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-21")'
+  20.0 TEL | [63] exit 1 in 0.08 secs.
+  20.0 TEL | [64] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-21.a.sanity.check.telepresence.io")'
+  20.1 TEL | [64] exit 1 in 0.13 secs.
+  20.2 TEL | Wait for vpn-tcp connection: hellotelepresence-22
+  20.2 TEL | [65] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-22")'
+  20.3 TEL | [65] exit 1 in 0.08 secs.
+  20.3 TEL | [66] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-22.a.sanity.check.telepresence.io")'
+  20.4 TEL | [66] exit 1 in 0.08 secs.
+  20.5 TEL | Wait for vpn-tcp connection: hellotelepresence-23
+  20.5 TEL | [67] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-23")'
+  20.6 TEL | [67] exit 1 in 0.13 secs.
+  20.6 TEL | [68] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-23.a.sanity.check.telepresence.io")'
+  20.9 TEL | [68] exit 1 in 0.24 secs.
+  21.0 TEL | Wait for vpn-tcp connection: hellotelepresence-24
+  21.0 TEL | [69] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-24")'
+  21.2 TEL | [69] exit 1 in 0.18 secs.
+  21.2 TEL | [70] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-24.a.sanity.check.telepresence.io")'
+  21.3 TEL | [70] exit 1 in 0.13 secs.
+  21.4 TEL | Wait for vpn-tcp connection: hellotelepresence-25
+  21.4 TEL | [71] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-25")'
+  21.5 TEL | [71] exit 1 in 0.14 secs.
+  21.5 TEL | [72] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-25.a.sanity.check.telepresence.io")'
+  21.8 TEL | [72] exit 1 in 0.30 secs.
+  21.9 TEL | Wait for vpn-tcp connection: hellotelepresence-26
+  21.9 TEL | [73] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-26")'
+  22.1 TEL | [73] exit 1 in 0.13 secs.
+  22.1 TEL | [74] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-26.a.sanity.check.telepresence.io")'
+  22.1 TEL | [74] exit 1 in 0.08 secs.
+  22.2 TEL | Wait for vpn-tcp connection: hellotelepresence-27
+  22.2 TEL | [75] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-27")'
+  22.3 TEL | [75] exit 1 in 0.08 secs.
+  22.3 TEL | [76] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-27.a.sanity.check.telepresence.io")'
+  22.5 TEL | [76] exit 1 in 0.13 secs.
+  22.6 TEL | Wait for vpn-tcp connection: hellotelepresence-28
+  22.6 TEL | [77] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-28")'
+  22.7 TEL | [77] exit 1 in 0.11 secs.
+  22.7 TEL | [78] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-28.a.sanity.check.telepresence.io")'
+  22.8 TEL | [78] exit 1 in 0.08 secs.
+  22.9 TEL | Wait for vpn-tcp connection: hellotelepresence-29
+  22.9 TEL | [79] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-29")'
+  22.9 TEL | [79] exit 1 in 0.07 secs.
+  22.9 TEL | [80] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-29.a.sanity.check.telepresence.io")'
+  23.1 TEL | [80] exit 1 in 0.14 secs.
+  23.2 TEL | Wait for vpn-tcp connection: hellotelepresence-30
+  23.2 TEL | [81] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-30")'
+  23.3 TEL | [81] exit 1 in 0.08 secs.
+  23.3 TEL | [82] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-30.a.sanity.check.telepresence.io")'
+  23.3 TEL | [82] exit 1 in 0.08 secs.
+  23.4 TEL | Wait for vpn-tcp connection: hellotelepresence-31
+  23.4 TEL | [83] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-31")'
+  23.5 TEL | [83] exit 1 in 0.08 secs.
+  23.5 TEL | [84] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-31.a.sanity.check.telepresence.io")'
+  23.6 TEL | [84] exit 1 in 0.07 secs.
+  23.7 TEL | Wait for vpn-tcp connection: hellotelepresence-32
+  23.7 TEL | [85] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-32")'
+  23.8 TEL | [85] exit 1 in 0.08 secs.
+  23.8 TEL | [86] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-32.a.sanity.check.telepresence.io")'
+  23.9 TEL | [86] exit 1 in 0.08 secs.
+  24.0 TEL | Wait for vpn-tcp connection: hellotelepresence-33
+  24.0 TEL | [87] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-33")'
+  24.0 TEL | [87] exit 1 in 0.08 secs.
+  24.0 TEL | [88] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-33.a.sanity.check.telepresence.io")'
+  24.1 TEL | [88] exit 1 in 0.08 secs.
+  24.2 TEL | Wait for vpn-tcp connection: hellotelepresence-34
+  24.2 TEL | [89] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-34")'
+  24.3 TEL | [89] exit 1 in 0.08 secs.
+  24.3 TEL | [90] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-34.a.sanity.check.telepresence.io")'
+  24.4 TEL | [90] exit 1 in 0.08 secs.
+  24.5 TEL | Wait for vpn-tcp connection: hellotelepresence-35
+  24.5 TEL | [91] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-35")'
+  24.6 TEL | [91] exit 1 in 0.08 secs.
+  24.6 TEL | [92] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-35.a.sanity.check.telepresence.io")'
+  24.6 TEL | [92] exit 1 in 0.08 secs.
+  24.7 TEL | Wait for vpn-tcp connection: hellotelepresence-36
+  24.7 TEL | [93] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-36")'
+  24.9 TEL | [93] exit 1 in 0.14 secs.
+  24.9 TEL | [94] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-36.a.sanity.check.telepresence.io")'
+  25.0 TEL | [94] exit 1 in 0.13 secs.
+  25.1 TEL | Wait for vpn-tcp connection: hellotelepresence-37
+  25.1 TEL | [95] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-37")'
+  25.2 TEL | [95] exit 1 in 0.08 secs.
+  25.2 TEL | [96] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-37.a.sanity.check.telepresence.io")'
+  25.3 TEL | [96] exit 1 in 0.08 secs.
+  25.4 TEL | Wait for vpn-tcp connection: hellotelepresence-38
+  25.4 TEL | [97] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-38")'
+  25.5 TEL | [97] exit 1 in 0.08 secs.
+  25.5 TEL | [98] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-38.a.sanity.check.telepresence.io")'
+  25.6 TEL | [98] exit 1 in 0.13 secs.
+  25.7 TEL | Wait for vpn-tcp connection: hellotelepresence-39
+  25.7 TEL | [99] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-39")'
+  25.8 TEL | [99] exit 1 in 0.07 secs.
+  25.8 TEL | [100] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-39.a.sanity.check.telepresence.io")'
+  25.9 TEL | [100] exit 1 in 0.13 secs.
+  26.0 TEL | Wait for vpn-tcp connection: hellotelepresence-40
+  26.0 TEL | [101] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-40")'
+  26.1 TEL | [101] exit 1 in 0.08 secs.
+  26.1 TEL | [102] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-40.a.sanity.check.telepresence.io")'
+  26.2 TEL | [102] exit 1 in 0.08 secs.
+  26.3 TEL | Wait for vpn-tcp connection: hellotelepresence-41
+  26.3 TEL | [103] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-41")'
+  26.3 TEL | [103] exit 1 in 0.08 secs.
+  26.3 TEL | [104] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-41.a.sanity.check.telepresence.io")'
+  26.4 TEL | [104] exit 1 in 0.07 secs.
+  26.5 TEL | Wait for vpn-tcp connection: hellotelepresence-42
+  26.5 TEL | [105] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-42")'
+  26.6 TEL | [105] exit 1 in 0.08 secs.
+  26.6 TEL | [106] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-42.a.sanity.check.telepresence.io")'
+  26.7 TEL | [106] exit 1 in 0.13 secs.
+  26.8 TEL | Wait for vpn-tcp connection: hellotelepresence-43
+  26.8 TEL | [107] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-43")'
+  26.9 TEL | [107] exit 1 in 0.09 secs.
+  26.9 TEL | [108] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-43.a.sanity.check.telepresence.io")'
+  27.0 TEL | [108] exit 1 in 0.11 secs.
+  27.1 TEL | Wait for vpn-tcp connection: hellotelepresence-44
+  27.1 TEL | [109] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-44")'
+  27.2 TEL | [109] exit 1 in 0.08 secs.
+  27.2 TEL | [110] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-44.a.sanity.check.telepresence.io")'
+  27.3 TEL | [110] exit 1 in 0.07 secs.
+  27.4 TEL | Wait for vpn-tcp connection: hellotelepresence-45
+  27.4 TEL | [111] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-45")'
+  27.5 TEL | [111] exit 1 in 0.13 secs.
+  27.5 TEL | [112] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-45.a.sanity.check.telepresence.io")'
+  27.6 TEL | [112] exit 1 in 0.07 secs.
+  27.7 TEL | Wait for vpn-tcp connection: hellotelepresence-46
+  27.7 TEL | [113] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-46")'
+  27.8 TEL | [113] exit 1 in 0.08 secs.
+  27.8 TEL | [114] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-46.a.sanity.check.telepresence.io")'
+  27.9 TEL | [114] exit 1 in 0.13 secs.
+  28.0 TEL | Wait for vpn-tcp connection: hellotelepresence-47
+  28.0 TEL | [115] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-47")'
+  28.1 TEL | [115] exit 1 in 0.08 secs.
+  28.1 TEL | [116] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-47.a.sanity.check.telepresence.io")'
+  28.2 TEL | [116] exit 1 in 0.08 secs.
+  28.3 TEL | Wait for vpn-tcp connection: hellotelepresence-48
+  28.3 TEL | [117] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-48")'
+  28.4 TEL | [117] exit 1 in 0.08 secs.
+  28.4 TEL | [118] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-48.a.sanity.check.telepresence.io")'
+  28.4 TEL | [118] exit 1 in 0.08 secs.
+  28.5 TEL | Wait for vpn-tcp connection: hellotelepresence-49
+  28.5 TEL | [119] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-49")'
+  28.6 TEL | [119] exit 1 in 0.08 secs.
+  28.6 TEL | [120] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-49.a.sanity.check.telepresence.io")'
+  28.7 TEL | [120] exit 1 in 0.08 secs.
+  28.8 TEL | Wait for vpn-tcp connection: hellotelepresence-50
+  28.8 TEL | [121] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-50")'
+  28.9 TEL | [121] exit 1 in 0.13 secs.
+  28.9 TEL | [122] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-50.a.sanity.check.telepresence.io")'
+  29.0 TEL | [122] exit 1 in 0.08 secs.
+  29.1 TEL | Wait for vpn-tcp connection: hellotelepresence-51
+  29.1 TEL | [123] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-51")'
+  29.2 TEL | [123] exit 1 in 0.08 secs.
+  29.2 TEL | [124] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-51.a.sanity.check.telepresence.io")'
+  29.3 TEL | [124] exit 1 in 0.08 secs.
+  29.4 TEL | Wait for vpn-tcp connection: hellotelepresence-52
+  29.4 TEL | [125] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-52")'
+  29.5 TEL | [125] exit 1 in 0.08 secs.
+  29.5 TEL | [126] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-52.a.sanity.check.telepresence.io")'
+  29.5 TEL | [126] exit 1 in 0.08 secs.
+  29.6 TEL | Wait for vpn-tcp connection: hellotelepresence-53
+  29.6 TEL | [127] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-53")'
+  29.8 TEL | [127] exit 1 in 0.13 secs.
+  29.8 TEL | [128] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-53.a.sanity.check.telepresence.io")'
+  29.9 TEL | [128] exit 1 in 0.18 secs.
+  30.1 TEL | Wait for vpn-tcp connection: hellotelepresence-54
+  30.1 TEL | [129] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-54")'
+  30.2 TEL | [129] exit 1 in 0.10 secs.
+  30.2 TEL | [130] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-54.a.sanity.check.telepresence.io")'
+  30.3 TEL | [130] exit 1 in 0.13 secs.
+  30.4 TEL | Wait for vpn-tcp connection: hellotelepresence-55
+  30.4 TEL | [131] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-55")'
+  30.5 TEL | [131] exit 1 in 0.13 secs.
+  30.5 TEL | [132] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-55.a.sanity.check.telepresence.io")'
+  30.6 TEL | [132] exit 1 in 0.08 secs.
+  30.7 TEL | Wait for vpn-tcp connection: hellotelepresence-56
+  30.7 TEL | [133] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-56")'
+  30.8 TEL | [133] exit 1 in 0.08 secs.
+  30.8 TEL | [134] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-56.a.sanity.check.telepresence.io")'
+  31.0 TEL | [134] exit 1 in 0.25 secs.
+  31.1 TEL | [135] Running: sudo -n echo -n
+  31.1 TEL | Wait for vpn-tcp connection: hellotelepresence-57
+  31.1 TEL | [136] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-57")'
+  31.1 TEL | [135] ran in 0.07 secs.
+  31.3 TEL | [136] exit 1 in 0.13 secs.
+  31.3 TEL | [137] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-57.a.sanity.check.telepresence.io")'
+  31.3 TEL | [137] exit 1 in 0.08 secs.
+  31.4 TEL | Wait for vpn-tcp connection: hellotelepresence-58
+  31.4 TEL | [138] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-58")'
+  31.5 TEL | [138] exit 1 in 0.07 secs.
+  31.5 TEL | [139] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-58.a.sanity.check.telepresence.io")'
+  31.6 TEL | [139] exit 1 in 0.07 secs.
+  31.7 TEL | Wait for vpn-tcp connection: hellotelepresence-59
+  31.7 TEL | [140] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-59")'
+  31.8 TEL | [140] exit 1 in 0.07 secs.
+  31.8 TEL | [141] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-59.a.sanity.check.telepresence.io")'
+  31.9 TEL | [141] exit 1 in 0.13 secs.
+  32.0 TEL | Wait for vpn-tcp connection: hellotelepresence-60
+  32.0 TEL | [142] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-60")'
+  32.1 TEL | [142] exit 1 in 0.08 secs.
+  32.1 TEL | [143] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-60.a.sanity.check.telepresence.io")'
+  32.2 TEL | [143] exit 1 in 0.08 secs.
+  32.3 TEL | Wait for vpn-tcp connection: hellotelepresence-61
+  32.3 TEL | [144] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-61")'
+  32.3 TEL | [144] exit 1 in 0.08 secs.
+  32.3 TEL | [145] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-61.a.sanity.check.telepresence.io")'
+  32.4 TEL | [145] exit 1 in 0.08 secs.
+  32.5 TEL | Wait for vpn-tcp connection: hellotelepresence-62
+  32.5 TEL | [146] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-62")'
+  32.6 TEL | [146] exit 1 in 0.08 secs.
+  32.6 TEL | [147] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-62.a.sanity.check.telepresence.io")'
+  32.7 TEL | [147] exit 1 in 0.08 secs.
+  32.8 TEL | Wait for vpn-tcp connection: hellotelepresence-63
+  32.8 TEL | [148] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-63")'
+  32.9 TEL | [148] exit 1 in 0.08 secs.
+  32.9 TEL | [149] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-63.a.sanity.check.telepresence.io")'
+  33.0 TEL | [149] exit 1 in 0.14 secs.
+  33.1 TEL | Wait for vpn-tcp connection: hellotelepresence-64
+  33.1 TEL | [150] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-64")'
+  33.2 TEL | [150] exit 1 in 0.07 secs.
+  33.2 TEL | [151] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-64.a.sanity.check.telepresence.io")'
+  33.3 TEL | [151] exit 1 in 0.08 secs.
+  33.4 TEL | Wait for vpn-tcp connection: hellotelepresence-65
+  33.4 TEL | [152] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-65")'
+  33.5 TEL | [152] exit 1 in 0.08 secs.
+  33.5 TEL | [153] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-65.a.sanity.check.telepresence.io")'
+  33.5 TEL | [153] exit 1 in 0.08 secs.
+  33.6 TEL | Wait for vpn-tcp connection: hellotelepresence-66
+  33.6 TEL | [154] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-66")'
+  33.7 TEL | [154] exit 1 in 0.08 secs.
+  33.7 TEL | [155] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-66.a.sanity.check.telepresence.io")'
+  33.8 TEL | [155] exit 1 in 0.08 secs.
+  33.9 TEL | Wait for vpn-tcp connection: hellotelepresence-67
+  33.9 TEL | [156] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-67")'
+  34.0 TEL | [156] exit 1 in 0.13 secs.
+  34.0 TEL | [157] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-67.a.sanity.check.telepresence.io")'
+  34.1 TEL | [157] exit 1 in 0.08 secs.
+  34.2 TEL | Wait for vpn-tcp connection: hellotelepresence-68
+  34.2 TEL | [158] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-68")'
+  34.3 TEL | [158] exit 1 in 0.08 secs.
+  34.3 TEL | [159] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-68.a.sanity.check.telepresence.io")'
+  34.4 TEL | [159] exit 1 in 0.08 secs.
+  34.5 TEL | Wait for vpn-tcp connection: hellotelepresence-69
+  34.5 TEL | [160] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-69")'
+  34.5 TEL | [160] exit 1 in 0.08 secs.
+  34.5 TEL | [161] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-69.a.sanity.check.telepresence.io")'
+  34.6 TEL | [161] exit 1 in 0.07 secs.
+  34.7 TEL | Wait for vpn-tcp connection: hellotelepresence-70
+  34.7 TEL | [162] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-70")'
+  34.8 TEL | [162] exit 1 in 0.08 secs.
+  34.8 TEL | [163] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-70.a.sanity.check.telepresence.io")'
+  34.9 TEL | [163] exit 1 in 0.08 secs.
+  35.0 TEL | Wait for vpn-tcp connection: hellotelepresence-71
+  35.0 TEL | [164] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-71")'
+  35.1 TEL | [164] exit 1 in 0.08 secs.
+  35.1 TEL | [165] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-71.a.sanity.check.telepresence.io")'
+  35.2 TEL | [165] exit 1 in 0.13 secs.
+  35.3 TEL | Wait for vpn-tcp connection: hellotelepresence-72
+  35.3 TEL | [166] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-72")'
+  35.4 TEL | [166] exit 1 in 0.08 secs.
+  35.4 TEL | [167] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-72.a.sanity.check.telepresence.io")'
+  35.5 TEL | [167] exit 1 in 0.08 secs.
+  35.6 TEL | Wait for vpn-tcp connection: hellotelepresence-73
+  35.6 TEL | [168] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-73")'
+  35.7 TEL | [168] exit 1 in 0.10 secs.
+  35.7 TEL | [169] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-73.a.sanity.check.telepresence.io")'
+  35.8 TEL | [169] exit 1 in 0.13 secs.
+  35.9 TEL | Wait for vpn-tcp connection: hellotelepresence-74
+  35.9 TEL | [170] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-74")'
+  36.0 TEL | [170] exit 1 in 0.09 secs.
+  36.0 TEL | [171] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-74.a.sanity.check.telepresence.io")'
+  36.1 TEL | [171] exit 1 in 0.07 secs.
+  36.2 TEL | Wait for vpn-tcp connection: hellotelepresence-75
+  36.2 TEL | [172] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-75")'
+  36.3 TEL | [172] exit 1 in 0.08 secs.
+  36.3 TEL | [173] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-75.a.sanity.check.telepresence.io")'
+  36.4 TEL | [173] exit 1 in 0.08 secs.
+  36.5 TEL | Wait for vpn-tcp connection: hellotelepresence-76
+  36.5 TEL | [174] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-76")'
+  36.5 TEL | [174] exit 1 in 0.08 secs.
+  36.5 TEL | [175] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-76.a.sanity.check.telepresence.io")'
+  36.6 TEL | [175] exit 1 in 0.09 secs.
+  36.7 TEL | Wait for vpn-tcp connection: hellotelepresence-77
+  36.7 TEL | [176] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-77")'
+  36.8 TEL | [176] exit 1 in 0.08 secs.
+  36.8 TEL | [177] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-77.a.sanity.check.telepresence.io")'
+  36.9 TEL | [177] exit 1 in 0.08 secs.
+  37.0 TEL | Wait for vpn-tcp connection: hellotelepresence-78
+  37.0 TEL | [178] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-78")'
+  37.1 TEL | [178] exit 1 in 0.08 secs.
+  37.1 TEL | [179] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-78.a.sanity.check.telepresence.io")'
+  37.1 TEL | [179] exit 1 in 0.07 secs.
+  37.2 TEL | Wait for vpn-tcp connection: hellotelepresence-79
+  37.2 TEL | [180] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-79")'
+  37.3 TEL | [180] exit 1 in 0.08 secs.
+  37.3 TEL | [181] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-79.a.sanity.check.telepresence.io")'
+  37.4 TEL | [181] exit 1 in 0.08 secs.
+  37.5 TEL | Wait for vpn-tcp connection: hellotelepresence-80
+  37.5 TEL | [182] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-80")'
+  37.6 TEL | [182] exit 1 in 0.08 secs.
+  37.6 TEL | [183] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-80.a.sanity.check.telepresence.io")'
+  37.7 TEL | [183] exit 1 in 0.07 secs.
+  37.8 TEL | Wait for vpn-tcp connection: hellotelepresence-81
+  37.8 TEL | [184] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-81")'
+  37.9 TEL | [184] exit 1 in 0.13 secs.
+  37.9 TEL | [185] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-81.a.sanity.check.telepresence.io")'
+  38.0 TEL | [185] exit 1 in 0.13 secs.
+  38.1 TEL | Wait for vpn-tcp connection: hellotelepresence-82
+  38.1 TEL | [186] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-82")'
+  38.2 TEL | [186] exit 1 in 0.08 secs.
+  38.2 TEL | [187] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-82.a.sanity.check.telepresence.io")'
+  38.3 TEL | [187] exit 1 in 0.07 secs.
+  38.4 TEL | Wait for vpn-tcp connection: hellotelepresence-83
+  38.4 TEL | [188] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-83")'
+  38.5 TEL | [188] exit 1 in 0.08 secs.
+  38.5 TEL | [189] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-83.a.sanity.check.telepresence.io")'
+  38.5 TEL | [189] exit 1 in 0.08 secs.
+  38.6 TEL | Wait for vpn-tcp connection: hellotelepresence-84
+  38.6 TEL | [190] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-84")'
+  38.7 TEL | [190] exit 1 in 0.08 secs.
+  38.7 TEL | [191] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-84.a.sanity.check.telepresence.io")'
+  38.9 TEL | [191] exit 1 in 0.13 secs.
+  39.0 TEL | Wait for vpn-tcp connection: hellotelepresence-85
+  39.0 TEL | [192] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-85")'
+  39.0 TEL | [192] exit 1 in 0.07 secs.
+  39.0 TEL | [193] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-85.a.sanity.check.telepresence.io")'
+  39.1 TEL | [193] exit 1 in 0.10 secs.
+  39.2 TEL | Wait for vpn-tcp connection: hellotelepresence-86
+  39.2 TEL | [194] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-86")'
+  39.3 TEL | [194] exit 1 in 0.08 secs.
+  39.3 TEL | [195] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-86.a.sanity.check.telepresence.io")'
+  39.4 TEL | [195] exit 1 in 0.08 secs.
+  39.5 TEL | Wait for vpn-tcp connection: hellotelepresence-87
+  39.5 TEL | [196] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-87")'
+  39.6 TEL | [196] exit 1 in 0.08 secs.
+  39.6 TEL | [197] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-87.a.sanity.check.telepresence.io")'
+  39.7 TEL | [197] exit 1 in 0.08 secs.
+  39.8 TEL | Wait for vpn-tcp connection: hellotelepresence-88
+  39.8 TEL | [198] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-88")'
+  39.9 TEL | [198] exit 1 in 0.13 secs.
+  39.9 TEL | [199] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-88.a.sanity.check.telepresence.io")'
+  40.1 TEL | [199] exit 1 in 0.21 secs.
+  40.2 TEL | Wait for vpn-tcp connection: hellotelepresence-89
+  40.2 TEL | [200] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-89")'
+  40.3 TEL | [200] exit 1 in 0.14 secs.
+  40.3 TEL | [201] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-89.a.sanity.check.telepresence.io")'
+  40.5 TEL | [201] exit 1 in 0.13 secs.
+  40.6 TEL | Wait for vpn-tcp connection: hellotelepresence-90
+  40.6 TEL | [202] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-90")'
+  40.7 TEL | [202] exit 1 in 0.13 secs.
+  40.7 TEL | [203] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-90.a.sanity.check.telepresence.io")'
+  40.8 TEL | [203] exit 1 in 0.13 secs.
+  40.9 TEL | Wait for vpn-tcp connection: hellotelepresence-91
+  40.9 TEL | [204] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-91")'
+  41.1 TEL | [204] exit 1 in 0.13 secs.
+  41.1 TEL | [205] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-91.a.sanity.check.telepresence.io")'
+  41.2 TEL | [205] exit 1 in 0.13 secs.
+  41.3 TEL | Wait for vpn-tcp connection: hellotelepresence-92
+  41.3 TEL | [206] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-92")'
+  41.4 TEL | (proxy checking local liveness)
+  41.4 TEL | [206] exit 1 in 0.13 secs.
+  41.4 TEL | [207] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-92.a.sanity.check.telepresence.io")'
+  41.5  11 | 2020-12-02T23:17:15+0000 [Poll#info] Checkpoint
+  41.6 TEL | [207] exit 1 in 0.19 secs.
+  41.7 TEL | Wait for vpn-tcp connection: hellotelepresence-93
+  41.7 TEL | [208] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-93")'
+  41.9 TEL | [208] exit 1 in 0.13 secs.
+  41.9 TEL | [209] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-93.a.sanity.check.telepresence.io")'
+  42.0 TEL | [209] exit 1 in 0.13 secs.
+  42.1 TEL | Wait for vpn-tcp connection: hellotelepresence-94
+  42.1 TEL | [210] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-94")'
+  42.2 TEL | [210] exit 1 in 0.13 secs.
+  42.2 TEL | [211] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-94.a.sanity.check.telepresence.io")'
+  42.5 TEL | [211] exit 1 in 0.24 secs.
+  42.6 TEL | Wait for vpn-tcp connection: hellotelepresence-95
+  42.6 TEL | [212] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-95")'
+  42.7 TEL | [212] exit 1 in 0.14 secs.
+  42.7 TEL | [213] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-95.a.sanity.check.telepresence.io")'
+  42.9 TEL | [213] exit 1 in 0.13 secs.
+  43.0 TEL | Wait for vpn-tcp connection: hellotelepresence-96
+  43.0 TEL | [214] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-96")'
+  43.2 TEL | [214] exit 1 in 0.18 secs.
+  43.2 TEL | [215] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-96.a.sanity.check.telepresence.io")'
+  43.3 TEL | [215] exit 1 in 0.13 secs.
+  43.4 TEL | Wait for vpn-tcp connection: hellotelepresence-97
+  43.4 TEL | [216] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-97")'
+  43.5 TEL | [216] exit 1 in 0.13 secs.
+  43.5 TEL | [217] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-97.a.sanity.check.telepresence.io")'
+  43.7 TEL | [217] exit 1 in 0.13 secs.
+  43.8 TEL | Wait for vpn-tcp connection: hellotelepresence-98
+  43.8 TEL | [218] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-98")'
+  43.9 TEL | [218] exit 1 in 0.19 secs.
+  43.9 TEL | [219] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-98.a.sanity.check.telepresence.io")'
+  44.1 TEL | [219] exit 1 in 0.15 secs.
+  44.2 TEL | Wait for vpn-tcp connection: hellotelepresence-99
+  44.2 TEL | [220] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-99")'
+  44.3 TEL | [220] exit 1 in 0.13 secs.
+  44.3 TEL | [221] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-99.a.sanity.check.telepresence.io")'
+  44.5 TEL | [221] exit 1 in 0.13 secs.
+  44.6 TEL | Wait for vpn-tcp connection: hellotelepresence-100
+  44.6 TEL | [222] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-100")'
+  44.7 TEL | [222] exit 1 in 0.13 secs.
+  44.7 TEL | [223] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-100.a.sanity.check.telepresence.io")'
+  44.8 TEL | [223] exit 1 in 0.13 secs.
+  44.9 TEL | Wait for vpn-tcp connection: hellotelepresence-101
+  44.9 TEL | [224] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-101")'
+  45.1 TEL | [224] exit 1 in 0.20 secs.
+  45.1 TEL | [225] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-101.a.sanity.check.telepresence.io")'
+  45.3 TEL | [225] exit 1 in 0.13 secs.
+  45.4 TEL | Wait for vpn-tcp connection: hellotelepresence-102
+  45.4 TEL | [226] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-102")'
+  45.5 TEL | [226] exit 1 in 0.13 secs.
+  45.5 TEL | [227] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-102.a.sanity.check.telepresence.io")'
+  45.6 TEL | [227] exit 1 in 0.13 secs.
+  45.7 TEL | Wait for vpn-tcp connection: hellotelepresence-103
+  45.7 TEL | [228] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-103")'
+  45.9 TEL | [228] exit 1 in 0.13 secs.
+  45.9 TEL | [229] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-103.a.sanity.check.telepresence.io")'
+  46.0 TEL | [229] exit 1 in 0.19 secs.
+  46.2 TEL | Wait for vpn-tcp connection: hellotelepresence-104
+  46.2 TEL | [230] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-104")'
+  46.3 TEL | [230] exit 1 in 0.13 secs.
+  46.3 TEL | [231] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-104.a.sanity.check.telepresence.io")'
+  46.4 TEL | [231] exit 1 in 0.13 secs.
+  46.5 TEL | Wait for vpn-tcp connection: hellotelepresence-105
+  46.5 TEL | [232] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-105")'
+  46.7 TEL | [232] exit 1 in 0.20 secs.
+  46.7 TEL | [233] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-105.a.sanity.check.telepresence.io")'
+  46.8 TEL | [233] exit 1 in 0.13 secs.
+  47.0 TEL | Wait for vpn-tcp connection: hellotelepresence-106
+  47.0 TEL | [234] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-106")'
+  47.1 TEL | [234] exit 1 in 0.14 secs.
+  47.1 TEL | [235] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-106.a.sanity.check.telepresence.io")'
+  47.2 TEL | [235] exit 1 in 0.13 secs.
+  47.3 TEL | Wait for vpn-tcp connection: hellotelepresence-107
+  47.3 TEL | [236] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-107")'
+  47.5 TEL | [236] exit 1 in 0.13 secs.
+  47.5 TEL | [237] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-107.a.sanity.check.telepresence.io")'
+  47.6 TEL | [237] exit 1 in 0.13 secs.
+  47.7 TEL | Wait for vpn-tcp connection: hellotelepresence-108
+  47.7 TEL | [238] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-108")'
+  47.8 TEL | [238] exit 1 in 0.13 secs.
+  47.8 TEL | [239] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-108.a.sanity.check.telepresence.io")'
+  48.0 TEL | [239] exit 1 in 0.13 secs.
+  48.1 TEL | Wait for vpn-tcp connection: hellotelepresence-109
+  48.1 TEL | [240] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-109")'
+  48.2 TEL | [240] exit 1 in 0.13 secs.
+  48.2 TEL | [241] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-109.a.sanity.check.telepresence.io")'
+  48.3 TEL | [241] exit 1 in 0.13 secs.
+  50.3 TEL | CRASH: vpn-tcp tunnel did not connect
+  50.3 TEL | Traceback (most recent call last):
+  50.3 TEL |   File "/usr/local/bin/telepresence/telepresence/cli.py", line 135, in crash_reporting
+  50.3 TEL |     yield
+  50.3 TEL |   File "/usr/local/bin/telepresence/telepresence/main.py", line 82, in main
+  50.3 TEL |     runner, remote_info, env, socks_port, ssh, mount_dir, pod_info
+  50.3 TEL |   File "/usr/local/bin/telepresence/telepresence/outbound/setup.py", line 112, in launch
+  50.3 TEL |     runner_, remote_info, command, args.also_proxy, env, ssh
+  50.3 TEL |   File "/usr/local/bin/telepresence/telepresence/outbound/local.py", line 126, in launch_vpn
+  50.3 TEL |     connect_sshuttle(runner, remote_info, also_proxy, ssh)
+  50.3 TEL |   File "/usr/local/bin/telepresence/telepresence/outbound/vpn.py", line 110, in connect_sshuttle
+  50.3 TEL |     raise RuntimeError("vpn-tcp tunnel did not connect")
+  50.3 TEL | RuntimeError: vpn-tcp tunnel did not connect
+  50.3 TEL | (calling crash reporter...)
+  61.3 TEL | [242] Running: sudo -n echo -n
+  61.3 TEL | [242] ran in 0.04 secs.
+  71.4 TEL | (proxy checking local liveness)
+  71.5  11 | 2020-12-02T23:17:45+0000 [Poll#info] Checkpoint
+  73.8 >>> | Exit cleanup in progress
+  73.8 TEL | (Cleanup) Diagnose vpn-tcp
+  73.8 TEL | [243] Running: ls -l /etc/resolv.conf
+  73.9 243 | lrwxr-xr-x  1 root  wheel  22 Jan  5  2020 /etc/resolv.conf -> ../var/run/resolv.conf
+  73.9 TEL | [243] ran in 0.04 secs.
+  73.9 TEL | [244] Running: grep -v '^#' /etc/resolv.conf
+  73.9 244 | domain home
+  73.9 244 | nameserver 192.168.1.1
+  73.9 244 | nameserver 192.168.1.1
+  73.9 TEL | [244] ran in 0.03 secs.
+  73.9 TEL | [245] Running: ls -l /etc/resolvconf
+  73.9 245 | ls: /etc/resolvconf: No such file or directory
+  73.9 TEL | [245] exit 1 in 0.04 secs.
+  73.9 TEL | [246] Running: cat /etc/nsswitch.conf
+  74.0 246 | cat: /etc/nsswitch.conf: No such file or directory
+  74.0 TEL | [246] exit 1 in 0.03 secs.
+  74.0 TEL | [247] Running: ls -l /etc/resolver
+  74.0 247 | ls: /etc/resolver: No such file or directory
+  74.0 TEL | [247] exit 1 in 0.04 secs.
+  74.0 TEL | (Cleanup) Kill BG process [20] sshuttle
+  74.0  20 | >> pfctl -a sshuttle6-12300 -F all
+  74.0 TEL | (Cleanup) Unmount remote filesystem
+  74.0 TEL | (Cleanup) Kill BG process [17] SSH port forward (socks and proxy poll)
+  74.0 TEL | [17] SSH port forward (socks and proxy poll): exit 0
+  74.0 TEL | (Cleanup) Kill Web server for proxy poll
+  74.1  20 | >> pfctl -X 15518041194592447907
+  74.1  20 | >> pfctl -a sshuttle-12300 -F all
+  74.1  20 | >> pfctl -X 15518041194367442947
+  74.1 TEL | [20] sshuttle: exit -15
+  74.5 TEL | (Cleanup) Kill BG process [16] SSH port forward (exposed ports)
+  74.5 TEL | [16] SSH port forward (exposed ports): exit 0
+  74.5 TEL | (Cleanup) Kill BG process [12] kubectl port-forward
+  74.5 TEL | [12] kubectl port-forward: exit -15
+  74.5 TEL | (Cleanup) Kill BG process [11] kubectl logs
+  74.5 TEL | [11] kubectl logs: exit -15
+  74.5 TEL | Background process (kubectl logs) exited with return code -15. Command was:
+  74.5 TEL |   kubectl --context blue-blue-master1 --namespace default logs -f telepresence-1606950992-3726609-11632 --container telepresence --tail=10
+  74.5 TEL | 
+  74.5 TEL | Recent output was:
+  74.5 TEL |   2020-12-02T23:16:45+0000 [-] Resolver added ('10.43.0.10', 53) to server list
+  74.5 TEL |   2020-12-02T23:16:45+0000 [-] SOCKSv5Factory starting on 9050
+  74.5 TEL |   2020-12-02T23:16:45+0000 [socks.SOCKSv5Factory#info] Starting factory <socks.SOCKSv5Factory object at 0x7ff5689f19b0>
+  74.5 TEL |   2020-12-02T23:16:45+0000 [-] DNSDatagramProtocol starting on 9053
+  74.5 TEL |   2020-12-02T23:16:45+0000 [-] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7ff5689f1c88>
+  74.5 TEL |   2020-12-02T23:16:45+0000 [-] Loaded.
+  74.5 TEL |   2020-12-02T23:16:45+0000 [twisted.scripts._twistd_unix.UnixAppLogger#info] twistd 20.3.0 (/usr/bin/python3.6 3.6.8) starting up.
+  74.5 TEL |   2020-12-02T23:16:45+0000 [twisted.scripts._twistd_unix.UnixAppLogger#info] reactor class: twisted.internet.epollreactor.EPollReactor.
+  74.5 TEL |   2020-12-02T23:17:15+0000 [Poll#info] Checkpoint
+  74.5 TEL |   2020-12-02T23:17:45+0000 [Poll#info] Checkpoint
+  74.5 TEL | (Cleanup) Delete proxy Pod, Service
+  74.5 >>> | Cleaning up Pod, Service
+  74.5 TEL | [248] Running: kubectl --context blue-blue-master1 --namespace default delete --ignore-not-found --wait=false --selector=telepresence=f4d4725360374b69b7e0f35080ecbd69 Pod,Service
+  74.9 248 | pod "telepresence-1606950992-3726609-11632" deleted
+  75.0 248 | service "telepresence-1606950992-3726609-11632" deleted
+  75.0 TEL | [248] ran in 0.52 secs.
+  75.0 TEL | (Cleanup) Kill sudo privileges holder
+  75.0 TEL | (Cleanup) Stop time tracking
+  75.0 TEL | END SPAN main.py:40(main)   74.9s
+  75.0 TEL | (Cleanup) Remove temporary directory
+  75.0 TEL | (Cleanup) Save caches
+  75.4 TEL | (sudo privileges holder thread exiting)

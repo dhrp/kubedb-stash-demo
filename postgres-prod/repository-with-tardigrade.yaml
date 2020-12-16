@@ -1,0 +1,11 @@
+apiVersion: stash.appscode.com/v1alpha1
+kind: Repository
+metadata:
+  name: tardigrade-repo
+spec:
+  backend:
+    s3:
+      endpoint: http://tardigrade-gateway-internal.tardigrade.svc.cluster.local:7777
+      bucket: database-backups
+      prefix: /backups/
+    storageSecretName: tardigrade-minio-secret

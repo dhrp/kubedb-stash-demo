@@ -1,0 +1,11 @@
+apiVersion: stash.appscode.com/v1alpha1
+kind: Repository
+metadata:
+  name: minio-repo
+spec:
+  backend:
+    s3:
+      endpoint: http://minio-1606242546.minio.svc.cluster.local:9000
+      bucket: stash-demo
+      prefix: /backup/demo/deployment/stash-demo
+    storageSecretName: minio-secret

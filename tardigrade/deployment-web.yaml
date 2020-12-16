@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tardigrade-web
+spec:
+  selector:
+    matchLabels:
+      app: tardigrade-web
+  template:
+    metadata:
+      labels:
+        app: tardigrade-web
+    spec:
+      containers:
+        - name: tardigrade-web
+          image: storjlabs/gateway
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 7777
+          volumeMounts:
+            - name: tardigrade-config
+              mountPath: "/etc/tardigrade/"
+            - name: minio-config
+              mountPath: "/etc/tardigrade/minio/"
+          args:
+            - run
+            - --config-dir=/etc/tardigrade
+            - --access=public-web
+            - --website
+      volumes:
+        - name: tardigrade-config
+          secret:
+            secretName: tardigade-config
+            items:
+              - key: config.yaml
+                path: config.yaml
+        - name: minio-config
+          emptyDir: {}
