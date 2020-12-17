@@ -25,8 +25,8 @@ install-catalog:
 
 
 # install stash
-upgrade-stash-enterprise:
-	helm upgrade stash-enterprise appscode/stash-enterprise  \
+install-stash-enterprise:
+	helm install stash-enterprise appscode/stash-enterprise  \
 	--version v0.11.7                  \
 	--namespace kube-system                       \
 	--set-file license=stash-enterprise-license.txt
