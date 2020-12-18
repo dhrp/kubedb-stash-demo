@@ -13,7 +13,7 @@ spec:
       apiVersion: appcatalog.appscode.com/v1alpha1
       kind: AppBinding
       name: postgres
-  schedule: "*/1 * * * *" # backup at every x minutes
+  schedule: "* */1 * * *" # backup at every x minutes
   paused: false
   backupHistoryLimit: 1
   retentionPolicy:

@@ -15,8 +15,6 @@ tardigrade-secret:
 tardigrade-repository:
 	kubectl apply -f repository-with-tardigrade.yaml
 
-
-
 # Make backupconfiguration
 backupconfiguration:
 	kubectl apply -f backupConfiguration-tardigrade.yaml
